@@ -1,0 +1,315 @@
+/* ======== GLOBAL STYLES & VARIABLES ======== */
+:root {
+    --primary-color: #007BFF;
+    --light-bg: #F8F9FA;
+    --dark-bg: #E9ECEF;
+    --text-color: #343A40;
+    --white-color: #FFFFFF;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* This makes the page scroll smoothly when clicking nav links */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* ======== SCROLLABLE CONTAINER LOGIC ======== */
+/* This is the key for the page-by-page scrolling effect */
+.container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh; /* Full viewport height */
+}
+
+section {
+    height: 100vh; /* Each section is a full "page" */
+    width: 100vw;
+    scroll-snap-align: start; /* Snap to the start of each section */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%;
+    position: relative;
+}
+
+/* Alternating background colors for sections */
+section:nth-of-type(even) {
+    background-color: var(--dark-bg);
+}
+
+.content-wrapper {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ======== NAVIGATION BAR ======== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 1rem 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* ======== PAGE 1: HOME ======== */
+#home {
+    text-align: center;
+    flex-direction: column;
+}
+
+.home-content h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.home-content p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #6c757d;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 5px solid var(--white-color);
+    box-shadow: var(--shadow);
+}
+
+/* Scroll down animation */
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.scroll-down a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    padding-top: 50px;
+    position: relative;
+    font-size: 0.8rem;
+}
+.scroll-down span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 24px;
+    height: 40px;
+    margin-left: -12px;
+    border: 2px solid var(--text-color);
+    border-radius: 50px;
+}
+.scroll-down span::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background-color: var(--text-color);
+    border-radius: 100%;
+    animation: scroll-animation 2s infinite;
+}
+@keyframes scroll-animation {
+    0% { opacity: 0; transform: translateY(0); }
+    40% { opacity: 1; }
+    80% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 0; }
+}
+
+
+/* ======== PAGE 2: ABOUT ======== */
+#about .about-text {
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+}
+
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    text-align: left;
+}
+
+.skill-category h3 {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.skill-category ul {
+    list-style: none;
+}
+
+.skill-category li {
+    padding: 0.3rem 0;
+}
+
+
+/* ======== PAGE 3: PROJECTS ======== */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background: var(--white-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-card video {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.project-card h3 {
+    font-size: 1.25rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
+.project-card p {
+    padding: 0 1rem 1rem 1rem;
+    font-size: 0.9rem;
+}
+
+.project-links {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.project-links a {
+    text-decoration: none;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.project-links a:hover {
+    background-color: #0056b3;
+}
+
+
+/* ======== PAGE 4: CONTACT ======== */
+#contact .content-wrapper > p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact-form button {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
+
+.social-links {
+    margin-top: 2rem;
+}
+
+.social-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.social-links a:hover {
+    text-decoration: underline;
+}
